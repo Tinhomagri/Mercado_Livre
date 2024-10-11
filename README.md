@@ -7,60 +7,116 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Cadastro de Produtos - Mercado Livre
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Este projeto é uma aplicação para cadastrar produtos utilizando a API do Mercado Livre. Ele permite a criação, armazenamento e gerenciamento de produtos de forma simples e eficiente.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Funcionalidades
 
-## Learning Laravel
+- Cadastro de produtos com informações como nome, descrição, preço, quantidade e categoria.
+- Upload de imagens dos produtos.
+- Integração com a API do Mercado Livre para listar categorias e cadastrar produtos.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Estrutura do Projeto
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 1. **Controllers**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **ProdutoController**: Gerencia as operações de criação e armazenamento de produtos.
 
-## Laravel Sponsors
+### 2. **Views**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **create.blade.php**: Formulário para cadastrar produtos, que inclui validação e exibição de mensagens de sucesso com alertas.
 
-### Premium Partners
+### 3. **JavaScript**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- Utiliza a biblioteca SweetAlert2 para exibir mensagens de sucesso após o cadastro do produto.
 
-## Contributing
+## Tecnologias Utilizadas
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **PHP**: Para o desenvolvimento do backend.
+- **Laravel**: Framework PHP utilizado para facilitar o desenvolvimento.
+- **JavaScript**: Para manipulação de alertas e validações no frontend.
+- **API do Mercado Livre**: Para obter categorias e cadastrar produtos.
+- **phpMyAdmin**: Utilizado como banco de dados para armazenar as informações dos produtos.
 
-## Code of Conduct
+## Como Executar o Projeto
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Clone o repositório:
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. Instale as dependências:
+    ```bash
+   composer install
 
-## License
+3. Configure o arquivo `.env` com as suas credenciais de banco de dados e API.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. Rode as migrações para criar as tabelas:
+    ```bash
+    php artisan migrate
+    ```
+
+5. Inicie o servidor:
+    ```bash
+    php artisan serve
+    ```
+
+## Banco de Dados
+
+A aplicação usa o **phpMyAdmin** para gerenciar o banco de dados MySQL. As tabelas são criadas automaticamente utilizando as migrações do Laravel.
+
+## 1. Controllers
+
+- **ProdutoController**:
+    - O controlador principal que gerencia as rotas de criação e listagem de produtos.
+    - Faz a integração com a API do Mercado Livre para obter categorias e cadastrar produtos.
+    - Após salvar o produto no banco de dados, ele realiza uma chamada à API para também cadastrar o produto no Mercado Livre.
+
+## 2. Views
+
+- **create.blade.php**: Página de cadastro de produtos com:
+    - Campos para nome, descrição, preço, quantidade, categoria e imagem.
+    - Integração com a API do Mercado Livre para selecionar categorias disponíveis.
+    - Pop-up de sucesso utilizando **SweetAlert2** ao finalizar o cadastro.
+
+## 3. JavaScript
+
+- **SweetAlert2**:
+    - Utilizado para mostrar uma notificação pop-up de sucesso após o cadastro do produto.
+    - O alerta é exibido automaticamente se todos os dados forem validados e o produto for cadastrado com sucesso.
+
+## 4. API do Mercado Livre
+
+- O projeto faz chamadas à API do Mercado Livre para:
+    - Obter a lista de categorias.
+    - Enviar informações dos produtos cadastrados para o Mercado Livre.
+    - É necessário um token de autenticação da API do Mercado Livre, que deve ser configurado no arquivo `.env`.
+
+## 5. Git e GitHub
+
+### Comandos úteis
+
+1. Inicialize o repositório:
+    ```bash
+    git init
+    ```
+
+2. Adicione a URL do repositório remoto:
+    ```bash
+    git remote add origin git@github.com:Tinhomagri/mercado-livre.git
+    ```
+
+3. Envie o código para o GitHub:
+    ```bash
+    git push origin main
+    ```
+
+## Contribuição
+
+Se deseja contribuir com este projeto, sinta-se à vontade para abrir uma issue ou um pull request.
+
+## Licença
+
+Este projeto está licenciado sob os termos da [MIT License](LICENSE).
